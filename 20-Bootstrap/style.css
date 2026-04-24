@@ -1,0 +1,241 @@
+/* =========================================
+   1. CSS Dəyişənləri (Rəng və Şrift idarəetməsi)
+   ========================================= */
+:root {
+    --primary: #f4623a;
+    --primary-dark: #d04f2a;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* Səhifədəki linklərə kliklədikdə səlis sürüşmə effekti (Smooth Scroll) */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+}
+
+.bg-primary { background-color: var(--primary) !important; }
+.text-primary { color: var(--primary) !important; }
+.text-white-75 { color: rgba(255, 255, 255, 0.75); }
+
+/* =========================================
+   2. Düymələr (Kölgə və Animasiyalarla)
+   ========================================= */
+.btn {
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50rem; /* Tam yumru görünüş */
+    transition: all 0.3s ease-in-out; /* Səlis keçid */
+}
+
+.btn-xl {
+    padding: 1.25rem 2.25rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px; /* Hərflərarası boşluq */
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(244, 98, 58, 0.4); /* 3D Kölgə effekti */
+}
+
+/* Düymənin üzərinə gəldikdə yuxarı qalxma effekti */
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-dark);
+    color: #fff;
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 20px rgba(244, 98, 58, 0.6);
+}
+
+.btn-light {
+    background-color: #fff;
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-light:hover, .btn-light:focus {
+    background-color: #e9ecef;
+    color: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   3. Naviqasiya (Navbar) 
+   ========================================= */
+#mainNav {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+#mainNav .navbar-brand {
+    color: var(--primary);
+    letter-spacing: 0.5px;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: var(--primary);
+}
+
+/* =========================================
+   4. Ana Ekran (Hero Section) & Parallax
+   ========================================= */
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    /* Arxa planın şəffaflığını tündləşdirdik ki, mətn daha yaxşı oxunsun */
+    background: linear-gradient(to bottom, rgba(33, 37, 41, 0.65) 0%, rgba(33, 37, 41, 0.65) 100%), 
+                url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center scroll;
+    background-size: cover;
+    background-attachment: fixed; /* Parallax effekti: Səhifəni sürüşdürdükdə şəkil sabit qalır */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+header.masthead h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Başlıq üçün kölgə */
+}
+
+/* Ayırıcı xətlər */
+hr.divider {
+    height: 0.25rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: var(--primary);
+    opacity: 1;
+    border: none;
+    border-radius: 50px;
+}
+
+hr.divider-light { background-color: #fff; }
+
+/* =========================================
+   5. Xidmətlər və İkon Animasiyaları
+   ========================================= */
+.page-section { padding: 6rem 0; }
+
+.bi {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+/* Xidmətlər blokunun üzərinə gəldikdə ikonların tullanma effekti */
+#services .col-lg-3:hover .bi {
+    transform: scale(1.2) translateY(-10px);
+}
+
+/* =========================================
+   6. Portfel (Qalereya) Kinematik Effekt
+   ========================================= */
+#portfolio .col-lg-4, #portfolio .col-sm-6 {
+    padding: 0;
+    overflow: hidden;
+}
+
+#portfolio img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: all 0.5s ease; /* Daha yavaş və səlis böyümə */
+    display: block;
+}
+
+/* Şəklin üzərinə gəldikdə böyümə və biraz qaralma effekti */
+#portfolio .col-lg-4:hover img, 
+#portfolio .col-sm-6:hover img {
+    transform: scale(1.15);
+    filter: brightness(0.8);
+}
+
+/* =========================================
+   7. RESPONSİV TƏNZİMLƏMƏLƏR (Media Queries)
+   ========================================= */
+@media (min-width: 768px) {
+    .page-section { padding: 8rem 0; }
+}
+
+@media (min-width: 992px) {
+    header.masthead {
+        padding-top: 15rem;
+        padding-bottom: calc(15rem - 4.5rem);
+    }
+    header.masthead h1 { font-size: 4rem; }
+}
+
+/* Mobil cihazlarda Naviqasiya Menyusunun görünüşü */
+@media (max-width: 991.98px) {
+    #mainNav {
+        padding: 0.5rem 1rem;
+    }
+    #mainNav .navbar-collapse {
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin-top: 10px;
+    }
+}
+/* =========================================
+   8. Əlaqə Formu (Contact Form)
+   ========================================= */
+
+/* Üzən etiketlərin (Floating labels) daxili boşluqları */
+.form-floating > .form-control {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+    border-radius: 0.375rem;
+    border-color: #ced4da;
+    box-shadow: none; /* Standart kölgəni ləğv etmək */
+}
+
+/* Kursor xanada olanda (Focus) narıncı rəngə çevrilməsi */
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(244, 98, 58, 0.25);
+}
+
+/* Mesaj yazmaq üçün textarea hündürlüyü xüsusi nizamlanır */
+textarea.form-control {
+    height: auto;
+}
+
+/* Göndər düyməsini şəkildəki kimi geniş və cəlbedici etmək */
+.d-grid .btn-primary {
+    padding: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    background-color: #f9a389; /* Şəkildəki kimi açıq narıncı ton (təqribi) */
+    border: none;
+    box-shadow: none;
+    color: #fff;
+}
+
+.d-grid .btn-primary:hover {
+    background-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(244, 98, 58, 0.4);
+}
