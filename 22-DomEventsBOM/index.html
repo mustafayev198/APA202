@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emlak Kartı</title>
+</head>
+<body style="background-color: #f4f7f6; display: flex; justify-content: center; padding: 50px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <div id="app"></div>
+
+    <script>
+        function setStyles(element, styles) {
+            Object.assign(element.style, styles);
+        }
+
+        // 1. Əsas Kart Konteyneri
+        const card = document.createElement('div');
+        setStyles(card, {
+            width: '380px',
+            backgroundColor: '#ffffff',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+            border: '1px solid #e1e5eb',
+            transition: 'box-shadow 0.3s ease',
+            cursor: 'default'
+        });
+
+        card.addEventListener('mouseenter', () => card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)');
+        card.addEventListener('mouseleave', () => card.style.boxShadow = '0 4px 15px rgba(0,0,0,0.05)');
+
+        const imageContainer = document.createElement('div');
+        setStyles(imageContainer, {
+            width: '100%',
+            height: '220px',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80")', // Nümunə ev şəkli
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            position: 'relative'
+        });
+
+        const heartIcon = document.createElement('div');
+        heartIcon.innerHTML = '&#9825;'; 
+        setStyles(heartIcon, {
+            position: 'absolute',
+            top: '15px',
+            right: '20px',
+            fontSize: '28px',
+            color: '#ffffff',
+            cursor: 'pointer',
+            textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+            transition: 'transform 0.2s ease, color 0.2s ease'
+        });
+
+        let isFavorited = false;
+        heartIcon.addEventListener('click', () => {
+            isFavorited = !isFavorited;
+            heartIcon.innerHTML = isFavorited ? '&#9829;' : '&#9825;'; 
+            heartIcon.style.color = isFavorited ? '#ff4d4d' : '#ffffff';
+            heartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => heartIcon.style.transform = 'scale(1)', 200);
+        });
+
+        imageContainer.appendChild(heartIcon);
+
+        const cardBody = document.createElement('div');
+        setStyles(cardBody, { padding: '25px 20px 20px 20px' });
+
+        // Tip və Yaş
+        const propertyInfo = document.createElement('div');
+        propertyInfo.textContent = 'DETACHED HOUSE • 5Y OLD';
+        setStyles(propertyInfo, {
+            color: '#6e8098',
+            fontSize: '13px',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
+            marginBottom: '10px'
+        });
+
+        const price = document.createElement('div');
+        price.textContent = '$750,000';
+        setStyles(price, {
+            color: '#1a2b3c',
+            fontSize: '32px',
+            fontWeight: '400',
+            marginBottom: '8px'
+        });
+
+        const address = document.createElement('div');
+        address.textContent = '742 Evergreen Terrace';
+        setStyles(address, {
+            color: '#6e8098',
+            fontSize: '16px',
+            marginBottom: '25px'
+        });
+
+        const specsContainer = document.createElement('div');
+        setStyles(specsContainer, {
+            display: 'flex',
+            alignItems: 'center',
+            borderTop: '1px solid #eef1f5',
+            borderBottom: '1px solid #eef1f5',
+            padding: '15px 0',
+            marginBottom: '20px',
+            gap: '30px'
+        });
+
+        const beds = document.createElement('div');
+        setStyles(beds, { display: 'flex', alignItems: 'center', gap: '8px', color: '#4a5b6c', fontSize: '15px' });
+        beds.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6e8098" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h18"/><path d="M3 14v5"/><path d="M21 14v5"/><path d="M5 14V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M8 10h.01"/><path d="M16 10h.01"/></svg>
+            <span><b>3</b> Bedrooms</span>
+        `;
+
+        const baths = document.createElement('div');
+        setStyles(baths, { display: 'flex', alignItems: 'center', gap: '8px', color: '#4a5b6c', fontSize: '15px' });
+        baths.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6e8098" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M10 5 L8 7"/><path d="M2 12h20"/><path d="M7 19v2"/><path d="M17 19v2"/></svg>
+            <span><b>2</b> Bathrooms</span>
+        `;
+
+        specsContainer.appendChild(beds);
+        specsContainer.appendChild(baths);
+
+        const realtorLabel = document.createElement('div');
+        realtorLabel.textContent = 'REALTOR';
+        setStyles(realtorLabel, {
+            color: '#8a9ab0',
+            fontSize: '12px',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
+            marginBottom: '10px'
+        });
+
+        const realtorInfo = document.createElement('div');
+        setStyles(realtorInfo, { display: 'flex', alignItems: 'center', gap: '15px' });
+
+        const avatar = document.createElement('div');
+        setStyles(avatar, {
+            width: '45px',
+            height: '45px',
+            borderRadius: '50%',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1531123897727-8f129e1bf98c?w=100&q=80")', // Nümunə profil şəkli
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        });
+
+        const realtorDetails = document.createElement('div');
+        
+        const realtorName = document.createElement('div');
+        realtorName.textContent = 'Tiffany Heffner';
+        setStyles(realtorName, { color: '#1a2b3c', fontSize: '16px', fontWeight: '700', marginBottom: '4px' });
+
+        const realtorPhone = document.createElement('div');
+        realtorPhone.textContent = '(555) 555-4321';
+        setStyles(realtorPhone, { color: '#8a9ab0', fontSize: '14px' });
+
+        realtorDetails.appendChild(realtorName);
+        realtorDetails.appendChild(realtorPhone);
+
+        realtorInfo.appendChild(avatar);
+        realtorInfo.appendChild(realtorDetails);
+
+        cardBody.appendChild(propertyInfo);
+        cardBody.appendChild(price);
+        cardBody.appendChild(address);
+        cardBody.appendChild(specsContainer);
+        cardBody.appendChild(realtorLabel);
+        cardBody.appendChild(realtorInfo);
+
+        card.appendChild(imageContainer);
+        card.appendChild(cardBody);
+
+        document.getElementById('app').appendChild(card);
+    </script>
+</body>
+</html>
